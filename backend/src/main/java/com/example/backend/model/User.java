@@ -1,5 +1,10 @@
 package com.example.backend.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
@@ -8,17 +13,13 @@ import java.time.Period;
 @Table(name = "user", uniqueConstraints = {
         @UniqueConstraint(name = "user_email_unique", columnNames = "email")
 })
+//@Setter
+//@Getter
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class User {
     @Id
-    @SequenceGenerator(
-            name = "user_sequence",
-            sequenceName = "user_sequence",
-            allocationSize = 1
-    )
-    @GeneratedValue(
-            strategy = GenerationType.SEQUENCE,
-            generator = "user_sequence"
-    )
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id", updatable = false)
     private Long id;
     @Column(name = "email", nullable = false, length = 40)
