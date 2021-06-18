@@ -1,5 +1,6 @@
 package com.example.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -39,6 +40,7 @@ public class User {
     @Column(name = "blocked", nullable = false, length = 1)
     private Integer blocked;
     @OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
+    @JsonIgnore
     List<ShoppingList> shoppingList;
 
     public User() {
