@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="Schemat bazy danych" id="899B72A6-4F7A-DB93-2673-41DB5715B81D" version="3.5">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:24:39 UTC</createdTime>
+<ownerDesignName>Schemat bazy danych</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>899B72A6-4F7A-DB93-2673-41DB5715B81D</designId>
+</OSDM_Design>

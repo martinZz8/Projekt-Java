@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="48BB41EB-B5C9-180C-2579-982E35B18AA1" mainViewID="BB8980F0-74AB-A030-146D-2FE66F664558">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:24:39 UTC</createdTime>
+<ownerDesignName>Schemat bazy danych</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>
