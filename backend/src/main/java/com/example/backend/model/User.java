@@ -8,6 +8,8 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "user")
 @Table(name = "user", uniqueConstraints = {
@@ -36,6 +38,8 @@ public class User {
     private String pass_hash;
     @Column(name = "blocked", nullable = false, length = 1)
     private Integer blocked;
+    @OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
+    List<ShoppingList> shoppingList;
 
     public User() {
     }
@@ -68,6 +72,7 @@ public class User {
         this.age = copy_user.age;
         this.pass_hash = copy_user.pass_hash;
         this.blocked = copy_user.blocked;
+        this.shoppingList=copy_user.shoppingList;
     }
 
     public Long getId() {
@@ -132,6 +137,14 @@ public class User {
 
     public void setBlocked(Integer blocked) {
         this.blocked = blocked;
+    }
+
+    public List<ShoppingList> getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setShoppingList(List<ShoppingList> shoppingList) {
+        this.shoppingList = shoppingList;
     }
 
     @Override

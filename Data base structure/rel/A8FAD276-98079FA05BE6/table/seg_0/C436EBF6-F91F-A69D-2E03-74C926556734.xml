@@ -98,5 +98,15 @@
 <colUsage columnID="44062A20-354B-5E35-76E8-D50194B5FBD3"/>
 </indexColumnUsage>
 </ind_PK_UK>
+<ind_PK_UK id="54542956-E73C-7009-CE9D-7AD8DE8DF4B8" name="user__UN">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 14:54:08 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="356022AE-1DD2-C6B8-FB6E-EBB6BACF9103"/>
+</indexColumnUsage>
+</ind_PK_UK>
 </indexes>
 </Table>
