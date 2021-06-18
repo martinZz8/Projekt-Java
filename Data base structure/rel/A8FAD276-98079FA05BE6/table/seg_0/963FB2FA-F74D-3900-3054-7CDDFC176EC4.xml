@@ -1,0 +1,69 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="963FB2FA-F74D-3900-3054-7CDDFC176EC4" name="shopping_list">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:33:35 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<ordsAlias>table_3</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="178EBC38-CA91-5F87-C628-E3DE56B575C6">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:34:08 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="user_id" id="6A60BED5-246F-443A-8F1F-6C82777E4102">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:34:33 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0BC27895-C0D1-24AE-2565-CCE5E5EF95AA" referredColumn="44062A20-354B-5E35-76E8-D50194B5FBD3"/>
+</associations>
+</Column>
+<Column name="name" id="6E621CBD-D4AA-F09B-78C9-1019EA1633D6">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:34:55 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E331FD2B-2568-7279-4391-E82F4F3411B4" name="shopping_list_PK">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:34:08 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="178EBC38-CA91-5F87-C628-E3DE56B575C6"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F1337F58-B449-8D23-9A4C-5E42A77901F2" name="shopping_list_user_FK">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:38:46 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6A60BED5-246F-443A-8F1F-6C82777E4102"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

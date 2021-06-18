@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<ProcessModel class="oracle.dbtools.crest.model.design.process.ProcessModel" name="Process Model" id="8EACDA39-BCB2-2AA0-68AD-BDA3BBEE4C6A">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:27:14 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</ProcessModel>

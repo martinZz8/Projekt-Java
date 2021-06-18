@@ -1,0 +1,81 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="5EC4F0EB-7CFA-B6DC-88B7-D9AAE628DBAC" name="shopList_prod">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:49:43 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<ordsAlias>table_7</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="50B41F4F-4D0B-45DC-D893-AC2673E39504">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:50:23 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="shopList_id" id="B82BBA5B-437B-A28D-BF18-334BD39753AC">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:50:45 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A6B76FA8-D458-531A-779B-1F62CF4ACB15" referredColumn="178EBC38-CA91-5F87-C628-E3DE56B575C6"/>
+</associations>
+</Column>
+<Column name="prod_id" id="32D143D3-4381-0DE8-2D09-7A6AF76D29DF">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:51:08 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="56917154-4B84-345F-4CBE-329192EFEBFA" referredColumn="61C32163-4556-8D13-8B6D-60966810DEC6"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="3D30A65A-A25B-7BB1-C6DD-E55FF19F9C18" name="shopList_prod_PK">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:50:23 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="50B41F4F-4D0B-45DC-D893-AC2673E39504"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="125F590A-F60F-89D9-EAE8-75B3A95DDD35" name="shopList_prod_shopping_list_FK">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:54:18 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B82BBA5B-437B-A28D-BF18-334BD39753AC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="1F78E81A-72E0-ECCC-C528-1E5D55BC12D3" name="shopList_prod_products_FK">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:55:10 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="32D143D3-4381-0DE8-2D09-7A6AF76D29DF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

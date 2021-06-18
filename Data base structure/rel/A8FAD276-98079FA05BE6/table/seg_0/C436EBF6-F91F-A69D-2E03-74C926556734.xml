@@ -1,0 +1,102 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C436EBF6-F91F-A69D-2E03-74C926556734" name="user">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:28:05 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<ordsAlias>table_1</ordsAlias>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id" id="44062A20-354B-5E35-76E8-D50194B5FBD3">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:29:28 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="email" id="356022AE-1DD2-C6B8-FB6E-EBB6BACF9103">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:29:51 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>40</dataTypeSize>
+<ownDataTypeParameters>40,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="first_name" id="D2845425-4C86-0F6F-40FA-56D9F4E8E370">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:30:14 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="last_name" id="B3C5CA63-B929-2DDC-2FFE-D9ED0D62DCA5">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:30:26 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="dob" id="08DC911D-03EB-7546-B3D7-7ADE53404731">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:30:40 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="pass_hash" id="D976B191-C15F-790A-24AE-DC6CAF79771D">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:32:50 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>60</dataTypeSize>
+<ownDataTypeParameters>60,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="blocked" id="92A62EE6-D4ED-0ECC-23DF-A733FC8344B8">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:33:28 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="68FE17D6-8881-3177-A4DC-EF971620127B" name="user_PK">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:29:28 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="44062A20-354B-5E35-76E8-D50194B5FBD3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

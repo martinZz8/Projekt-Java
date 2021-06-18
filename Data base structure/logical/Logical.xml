@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<LogicalDesign class="oracle.dbtools.crest.model.design.logical.LogicalDesign" name="Logical" id="C6B7FA9A-24E0-10DA-6FF9-2C929A3BFADC" mainViewID="9FF19127-1B5B-4238-D51B-5ECF3AB8B820">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:27:14 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</LogicalDesign>

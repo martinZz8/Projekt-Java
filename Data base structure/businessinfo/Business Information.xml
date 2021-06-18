@@ -1,0 +1,7 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<BusinessInfoDesign class="oracle.dbtools.crest.model.businessinfo.BusinessInfoDesign" name="Business Information" id="ED607618-E1FB-3ED1-6536-80BC14DCAE55">
+<createdBy>ewing</createdBy>
+<createdTime>2021-06-18 13:27:14 UTC</createdTime>
+<ownerDesignName>Data base structure</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+</BusinessInfoDesign>
