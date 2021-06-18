@@ -34,10 +34,20 @@ public class User {
     private Integer age;
     @Column(name = "pass_hash", nullable = false, length = 60)
     private String pass_hash;
-    @Column(name = "blocked", length = 1)
+    @Column(name = "blocked", nullable = false, length = 1)
     private Integer blocked;
 
     public User() {
+    }
+
+    public User(Long id, String email, String first_name, String last_name, LocalDate dob, String pass_hash, Integer blocked) {
+        this.id = id;
+        this.email = email;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.dob = dob;
+        this.pass_hash = pass_hash;
+        this.blocked = blocked;
     }
 
     public User(String email, String first_name, String last_name, LocalDate dob, String pass_hash, Integer blocked) {
@@ -47,6 +57,17 @@ public class User {
         this.dob = dob;
         this.pass_hash = pass_hash;
         this.blocked = blocked;
+    }
+
+    public User(User copy_user) {
+        this.id = copy_user.id;
+        this.email = copy_user.email;
+        this.first_name = copy_user.first_name;
+        this.last_name = copy_user.last_name;
+        this.dob = copy_user.dob;
+        this.age = copy_user.age;
+        this.pass_hash = copy_user.pass_hash;
+        this.blocked = copy_user.blocked;
     }
 
     public Long getId() {

@@ -44,8 +44,8 @@ public class UserController {
     @PostMapping(path= "/add")
     public ResponseEntity<String> addUser(@RequestBody User newUser)
     {
-        if(userService.addUser(newUser)!=null)
-            return ResponseEntity.ok("Success");
+        if(userService.addUser(newUser))
+            return ResponseEntity.status(HttpStatus.CREATED).body("Success");
         else
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure");
     }
@@ -56,7 +56,7 @@ public class UserController {
         try
         {
             if(userService.deleteUser(Long.parseLong(userId)))
-                return ResponseEntity.ok("Success");
+                return ResponseEntity.status(HttpStatus.CREATED).body("Success");
             else
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure");
         }
@@ -66,9 +66,26 @@ public class UserController {
         }
     }
 
-    @PutMapping(path="/update")
-    public User updateUser(@RequestBody User newUser)
+    @PutMapping(path="/update", produces = "application/json")
+    public Optional<User> updateUser(@RequestBody User newUser)
     {
-        return userService.updateUser(newUser);
+        User u = userService.updateUser(newUser);
+        if(u!=null)
+        {
+            return Optional.of(u);
+        }
+        else
+        {
+            return Optional.empty();
+        }
+    }
+
+    @PutMapping(path="/set_block", produces = "application/json")
+    public ResponseEntity<String> updateBlockOfUser(@RequestParam(name = "email", required = true) String email, @RequestParam(name="block", required = true) String block_flag)
+    {
+        if(userService.updateBlockOfUser(email, Integer.parseInt(block_flag)))
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Success");
+        else
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure");
     }
 }
