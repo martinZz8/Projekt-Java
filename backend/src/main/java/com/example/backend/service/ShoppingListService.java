@@ -70,7 +70,6 @@ public class ShoppingListService {
                 if(item.getId().equals(shoppingListId))
                 {
                     s_u.remove(item);
-                    System.out.println("Haha");
                     break;
                 }
             }
