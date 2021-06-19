@@ -1,5 +1,9 @@
 package com.example.backend.controller;
 
+import com.example.backend.DTO.ShoppingListDTOOP;
+import com.example.backend.DTO.UserDTOI;
+import com.example.backend.DTO.UserDTOO;
+import com.example.backend.model.ShoppingList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +27,13 @@ public class UserController {
     }
 
     @GetMapping(path = "/all", produces = "application/json")
-    public List<User> getAllUsers()
+    public List<UserDTOO> getAllUsers()
     {
         return userService.getAllUsers();
     }
 
     @GetMapping(path = "/{userId}", produces = "application/json")
-    public Optional<User> getUser(@PathVariable String userId)
+    public Optional<UserDTOO> getUser(@PathVariable String userId)
     {
         try
         {
@@ -41,8 +45,14 @@ public class UserController {
         }
     }
 
+    @GetMapping(path="/all_shopping_lists/{email}", produces = "application/json")
+    public List<ShoppingListDTOOP> getAllShoppingLists(@PathVariable String email)
+    {
+        return userService.getAllShoppingLists(email);
+    }
+
     @PostMapping(path= "/add")
-    public ResponseEntity<String> addUser(@RequestBody User newUser)
+    public ResponseEntity<String> addUser(@RequestBody UserDTOI newUser)
     {
         if(userService.addUser(newUser))
             return ResponseEntity.status(HttpStatus.CREATED).body("Success");
@@ -67,9 +77,9 @@ public class UserController {
     }
 
     @PutMapping(path="/update", produces = "application/json")
-    public Optional<User> updateUser(@RequestBody User newUser)
+    public Optional<UserDTOO> updateUser(@RequestBody UserDTOI newUser)
     {
-        User u = userService.updateUser(newUser);
+        UserDTOO u = userService.updateUser(newUser);
         if(u!=null)
         {
             return Optional.of(u);
@@ -87,5 +97,17 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Success");
         else
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure");
+    }
+
+    @PutMapping(path="/update_password", produces = "application/json")
+    public ResponseEntity<String> updatePasswordOfUser(@RequestParam(name = "email", required = true) String email, @RequestParam(name="password", required = true) String new_password)
+    {
+        Integer ret = userService.updatePasswordOfUser(email, new_password);
+        if(ret==2)
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Success");
+        else if (ret==1)
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure - the same password was given");
+        else
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure - user with given email doesn't exist");
     }
 }

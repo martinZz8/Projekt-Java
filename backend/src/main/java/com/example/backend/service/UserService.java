@@ -6,11 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.backend.DTO.ShoppingListDTOOP;
+import com.example.backend.DTO.UserDTOI;
+import com.example.backend.DTO.UserDTOO;
+import com.example.backend.model.ShoppingList;
 import com.example.backend.model.User;
 import com.example.backend.repositories.UserRepository;
 import net.bytebuddy.dynamic.DynamicType;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Service
 public class UserService {
@@ -21,25 +27,24 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> getAllUsers()
+    public List<UserDTOO> getAllUsers()
     {
-        List<User> proper_users = new ArrayList<>();
+        List<UserDTOO> proper_users = new ArrayList<>();
         List<User> actual_users = userRepository.findAll();
         for (User u: actual_users) {
-            User ret_u = new User(u);
-            ret_u.setPass_hash("");
+            UserDTOO ret_u = new UserDTOO(u);
             proper_users.add(ret_u);
         }
         return proper_users;
     }
 
-    public Optional<User> getUser(Long userId)
+    public Optional<UserDTOO> getUser(Long userId)
     {
         Optional<User> actual_user = userRepository.findById(userId);
         if(actual_user.isPresent())
         {
-            User ret_u = new User(actual_user.get());
-            ret_u.setPass_hash("");
+            User act_u = new User(actual_user.get());
+            UserDTOO ret_u = new UserDTOO(act_u);
             return Optional.of(ret_u);
         }
         else
@@ -48,12 +53,34 @@ public class UserService {
         }
     }
 
-    public boolean addUser(User newUser)
+    public List<ShoppingListDTOOP> getAllShoppingLists(String email) {
+        User user = userRepository.getByEmail(email);
+        if(user!=null)
+        {
+            List<ShoppingList> sl = user.getShoppingList();
+            List<ShoppingListDTOOP> ret_sl = new ArrayList<>();
+            for(ShoppingList item : sl)
+            {
+                ShoppingListDTOOP n_sl = new ShoppingListDTOOP(item.getId(), item.getName());
+                ret_sl.add(n_sl);
+            }
+            return ret_sl;
+        }
+        else
+        {
+            return new ArrayList<>();
+        }
+    }
+
+    public boolean addUser(UserDTOI newUser)
     {
         User user = userRepository.getByEmail(newUser.getEmail());
         if (user==null)
         {
-            userRepository.save(newUser);
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String encoded_password = passwordEncoder.encode(newUser.getPassword());
+            User u = new User(newUser.getEmail(), newUser.getFirst_name(), newUser.getLast_name(), newUser.getDob(), encoded_password, newUser.getBlocked());
+            userRepository.save(u);
             return true;
         }
         else
@@ -74,7 +101,7 @@ public class UserService {
         }
     }
 
-    public User updateUser(User u) {
+    public UserDTOO updateUser(UserDTOI u) {
         User user = userRepository.getByEmail(u.getEmail());
         if(user!=null)
         {
@@ -92,9 +119,7 @@ public class UserService {
 
             user.setDob(u.getDob());
 
-            User saved_user = new User(userRepository.save(user));
-            saved_user.setPass_hash("");
-            return saved_user;
+            return new UserDTOO(userRepository.save(user));
         }
         else
         {
@@ -120,6 +145,29 @@ public class UserService {
         else
         {
             return false;
+        }
+    }
+
+    public Integer updatePasswordOfUser(String email, String new_password) {
+        User user = userRepository.getByEmail(email);
+        if(user!=null)
+        {
+            PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            if(!passwordEncoder.matches(new_password, user.getPass_hash()))
+            {
+                String np = passwordEncoder.encode(new_password);
+                user.setPass_hash(np);
+                userRepository.save(user);
+                return 2;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+        else
+        {
+            return 0;
         }
     }
 }

@@ -39,7 +39,7 @@ public class User {
     private String pass_hash;
     @Column(name = "blocked", nullable = false, length = 1)
     private Integer blocked;
-    @OneToMany(mappedBy = "user", cascade=CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
     @JsonIgnore
     List<ShoppingList> shoppingList;
 
