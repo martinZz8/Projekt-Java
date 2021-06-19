@@ -1,6 +1,7 @@
 package com.example.backend.service;
 
 import com.example.backend.DTO.ShoppingListDTOI;
+import com.example.backend.DTO.ShoppingListDTOOP;
 import com.example.backend.model.ShoppingList;
 import com.example.backend.model.User;
 import com.example.backend.repositories.ShoppingListRepository;
@@ -8,6 +9,8 @@ import com.example.backend.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -25,6 +28,17 @@ public class ShoppingListService {
 
     public List<ShoppingList> getAllShoppingLists() {
         return shoppingListRepository.findAll();
+    }
+
+    public List<ShoppingListDTOOP> getAllShoppingListsSmall() {
+        List<ShoppingList> sl = shoppingListRepository.findAll();
+        List<ShoppingListDTOOP> ret_sl = new ArrayList<>();
+        for(ShoppingList item : sl)
+        {
+            ShoppingListDTOOP n_sl = new ShoppingListDTOOP(item.getId(), item.getName());
+            ret_sl.add(n_sl);
+        }
+        return ret_sl;
     }
 
     public Optional<ShoppingList> getShoppingList(Long shoppingListId) {
@@ -45,10 +59,22 @@ public class ShoppingListService {
         }
     }
 
+    @Transactional
     public boolean deleteShoppingList(Long shoppingListId) {
-        if(userRepository.existsById(shoppingListId))
+        Optional<ShoppingList> optional_sl = shoppingListRepository.findById(shoppingListId);
+        if(optional_sl.isPresent())
         {
-            userRepository.deleteById(shoppingListId);
+            List<ShoppingList> s_u = optional_sl.get().getUser().getShoppingList();
+            for(ShoppingList item : s_u)
+            {
+                if(item.getId().equals(shoppingListId))
+                {
+                    s_u.remove(item);
+                    System.out.println("Haha");
+                    break;
+                }
+            }
+            shoppingListRepository.deleteById(shoppingListId);
             return true;
         }
         else

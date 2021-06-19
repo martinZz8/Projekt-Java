@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.DTO.ShoppingListDTOI;
+import com.example.backend.DTO.ShoppingListDTOOP;
 import com.example.backend.model.ShoppingList;
 import com.example.backend.service.ShoppingListService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +27,12 @@ public class ShoppingListController {
     public List<ShoppingList> getAllShoppingLists()
     {
         return shoppingListService.getAllShoppingLists();
+    }
+
+    @GetMapping(path = "/all/small", produces = "application/json")
+    public List<ShoppingListDTOOP> getAllShoppingListsSmall()
+    {
+        return shoppingListService.getAllShoppingListsSmall();
     }
 
     @GetMapping(path = "/{shoppingListId}", produces = "application/json")
