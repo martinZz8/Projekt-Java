@@ -39,7 +39,7 @@ public class User {
     private String pass_hash;
     @Column(name = "blocked", nullable = false, length = 1)
     private Integer blocked;
-    @OneToMany(mappedBy = "user", cascade=CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     @JsonIgnore
     List<ShoppingList> shoppingList;
 
@@ -54,6 +54,7 @@ public class User {
         this.dob = dob;
         this.pass_hash = pass_hash;
         this.blocked = blocked;
+        this.shoppingList = new ArrayList<>();
     }
 
     public User(String email, String first_name, String last_name, LocalDate dob, String pass_hash, Integer blocked) {
@@ -63,6 +64,7 @@ public class User {
         this.dob = dob;
         this.pass_hash = pass_hash;
         this.blocked = blocked;
+        this.shoppingList = new ArrayList<>();
     }
 
     public User(User copy_user) {

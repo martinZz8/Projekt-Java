@@ -1,5 +1,5 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CB28D7A3-2B75-686B-93B6-38291E6109ED" name="products">
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="CB28D7A3-2B75-686B-93B6-38291E6109ED" name="product">
 <createdBy>ewing</createdBy>
 <createdTime>2021-06-18 13:41:48 UTC</createdTime>
 <ownerDesignName>Data base structure</ownerDesignName>

@@ -1,6 +1,8 @@
 package com.example.backend.controller;
 
+import com.example.backend.DTO.ProductDTOOPT;
 import com.example.backend.DTO.ShoppingListDTOI;
+import com.example.backend.DTO.ShoppingListDTOO;
 import com.example.backend.DTO.ShoppingListDTOOP;
 import com.example.backend.model.ShoppingList;
 import com.example.backend.service.ShoppingListService;
@@ -9,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +27,7 @@ public class ShoppingListController {
     }
 
     @GetMapping(path = "/all", produces = "application/json")
-    public List<ShoppingList> getAllShoppingLists()
+    public List<ShoppingListDTOO> getAllShoppingLists()
     {
         return shoppingListService.getAllShoppingLists();
     }
@@ -36,7 +39,7 @@ public class ShoppingListController {
     }
 
     @GetMapping(path = "/{shoppingListId}", produces = "application/json")
-    public Optional<ShoppingList> getShoppingList(@PathVariable String shoppingListId)
+    public Optional<ShoppingListDTOO> getShoppingList(@PathVariable String shoppingListId)
     {
         try
         {
@@ -46,6 +49,20 @@ public class ShoppingListController {
         {
             return Optional.empty();
         }
+    }
+
+    @GetMapping(path = "/all_products/{shoppingListId}", produces = "application/json")
+    public List<ProductDTOOPT> getAllProducts(@PathVariable String shoppingListId)
+    {
+        try
+        {
+            return shoppingListService.getAllProducts(Long.parseLong(shoppingListId));
+        }
+        catch(NumberFormatException e)
+        {
+            return new ArrayList<>();
+        }
+
     }
 
     @PostMapping(path= "/add")
@@ -75,11 +92,11 @@ public class ShoppingListController {
     }
 
     @PutMapping(path="/update/{shoppingListId}", produces = "application/json")
-    public Optional<ShoppingList> updateShoppingList(@PathVariable String shoppingListId, @RequestBody ShoppingListDTOI newShoppingList)
+    public Optional<ShoppingListDTOO> updateShoppingList(@PathVariable String shoppingListId, @RequestBody ShoppingListDTOI newShoppingList)
     {
         try
         {
-            ShoppingList sl = shoppingListService.updateShoppingList(Long.parseLong(shoppingListId), newShoppingList);
+            ShoppingListDTOO sl = shoppingListService.updateShoppingList(Long.parseLong(shoppingListId), newShoppingList);
             if(sl!=null)
             {
                 return Optional.of(sl);

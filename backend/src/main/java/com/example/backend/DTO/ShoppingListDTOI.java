@@ -4,6 +4,9 @@ public class ShoppingListDTOI {
     private String name;
     private Long user_id;
 
+    public ShoppingListDTOI() {
+    }
+
     public ShoppingListDTOI(String name, Long user_id) {
         this.name = name;
         this.user_id = user_id;

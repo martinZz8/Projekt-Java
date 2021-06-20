@@ -1,5 +1,7 @@
 package com.example.backend.DTO;
 
+import com.example.backend.model.ShoppingList;
+
 public class ShoppingListDTOOP {
     private Long id;
     private String name;
@@ -16,6 +18,11 @@ public class ShoppingListDTOOP {
     public ShoppingListDTOOP(ShoppingListDTOOP shoppingListDTOOP) {
         this.id = shoppingListDTOOP.id;
         this.name = shoppingListDTOOP.name;
+    }
+
+    public ShoppingListDTOOP(ShoppingList shoppingList) {
+        this.id = shoppingList.getId();
+        this.name = shoppingList.getName();
     }
 
     public Long getId() {

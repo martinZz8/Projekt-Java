@@ -1,9 +1,9 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="56917154-4B84-345F-4CBE-329192EFEBFA" containerWithKeyObject="5EC4F0EB-7CFA-B6DC-88B7-D9AAE628DBAC" localFKIndex="1F78E81A-72E0-ECCC-C528-1E5D55BC12D3" name="shopList_prod_products_FK">
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="56917154-4B84-345F-4CBE-329192EFEBFA" containerWithKeyObject="5EC4F0EB-7CFA-B6DC-88B7-D9AAE628DBAC" localFKIndex="1F78E81A-72E0-ECCC-C528-1E5D55BC12D3" name="products_in_lists_products_FK">
 <createdBy>ewing</createdBy>
 <createdTime>2021-06-18 13:55:10 UTC</createdTime>
 <ownerDesignName>Data base structure</ownerDesignName>
-<referredTableLongName>products</referredTableLongName>
+<referredTableLongName>product</referredTableLongName>
 <deleteRule>CASCADE</deleteRule>
 <referredTableID>CB28D7A3-2B75-686B-93B6-38291E6109ED</referredTableID>
 <keyObject>C6927443-F590-AB99-4ABE-7DF75490F072</keyObject>

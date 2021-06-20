@@ -3,14 +3,20 @@ package com.example.backend.service;
 import java.text.DateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import com.example.backend.DTO.ShoppingListDTOOP;
 import com.example.backend.DTO.UserDTOI;
 import com.example.backend.DTO.UserDTOO;
+import com.example.backend.model.Product;
+import com.example.backend.model.ProductsInLists;
 import com.example.backend.model.ShoppingList;
 import com.example.backend.model.User;
+import com.example.backend.repositories.ProductRepository;
+import com.example.backend.repositories.ProductsInListsRepository;
+import com.example.backend.repositories.ShoppingListRepository;
 import com.example.backend.repositories.UserRepository;
 import net.bytebuddy.dynamic.DynamicType;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,13 +24,21 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.transaction.Transactional;
+
 @Service
 public class UserService {
     private final UserRepository userRepository;
+    private final ShoppingListRepository shoppingListRepository;
+    private final ProductRepository productRepository;
+    private final ProductsInListsRepository productsInListsRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, ShoppingListRepository shoppingListRepository, ProductRepository productRepository, ProductsInListsRepository productsInListsRepository) {
         this.userRepository = userRepository;
+        this.shoppingListRepository = shoppingListRepository;
+        this.productRepository = productRepository;
+        this.productsInListsRepository = productsInListsRepository;
     }
 
     public List<UserDTOO> getAllUsers()
@@ -43,8 +57,7 @@ public class UserService {
         Optional<User> actual_user = userRepository.findById(userId);
         if(actual_user.isPresent())
         {
-            User act_u = new User(actual_user.get());
-            UserDTOO ret_u = new UserDTOO(act_u);
+            UserDTOO ret_u = new UserDTOO(actual_user.get());
             return Optional.of(ret_u);
         }
         else
@@ -61,7 +74,7 @@ public class UserService {
             List<ShoppingListDTOOP> ret_sl = new ArrayList<>();
             for(ShoppingList item : sl)
             {
-                ShoppingListDTOOP n_sl = new ShoppingListDTOOP(item.getId(), item.getName());
+                ShoppingListDTOOP n_sl = new ShoppingListDTOOP(item);
                 ret_sl.add(n_sl);
             }
             return ret_sl;
@@ -89,9 +102,21 @@ public class UserService {
         }
     }
 
+    @Transactional
     public boolean deleteUser(Long userId) {
         if(userRepository.existsById(userId))
         {
+            //deleting all linked shopping lists
+            List<ShoppingList> sl = shoppingListRepository.findAll();
+            for(ShoppingList item : sl)
+            {
+                if(item.getUser().getId().equals(userId))
+                {
+                    //deleting all linked entries in Product, ShoppingList and ProductsInLists
+                    DeleteShoppingList.deleteShoppingList(item.getId(), item.getProductsInLists(), productsInListsRepository, shoppingListRepository);
+                }
+            }
+            //deleting user
             userRepository.deleteById(userId);
             return true;
         }
