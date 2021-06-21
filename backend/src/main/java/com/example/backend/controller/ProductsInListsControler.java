@@ -1,6 +1,7 @@
 package com.example.backend.controller;
 
 import com.example.backend.DTO.ProductsInListsDTOI;
+import com.example.backend.DTO.ProductsInListsDTOO;
 import com.example.backend.model.ProductsInLists;
 import com.example.backend.service.ProductsInListsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,13 +24,13 @@ public class ProductsInListsControler {
     }
 
     @GetMapping(path = "/all", produces = "application/json")
-    public List<ProductsInLists> getAllProductsInLists()
+    public List<ProductsInListsDTOO> getAllProductsInLists()
     {
         return productsInListsService.getAllProductsInLists();
     }
 
     @GetMapping(path = "/{productsInListsId}", produces = "application/json")
-    public Optional<ProductsInLists> getProductInList(@PathVariable String productsInListsId)
+    public Optional<ProductsInListsDTOO> getProductInList(@PathVariable String productsInListsId)
     {
         try
         {
@@ -76,7 +77,7 @@ public class ProductsInListsControler {
             if(productsInListsService.deleteProductInList(Long.parseLong(productsInListsId)))
                 return ResponseEntity.status(HttpStatus.CREATED).body("Success");
             else
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure");
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure -mhm");
         }
         catch(NumberFormatException e)
         {

@@ -3,13 +3,12 @@ package com.example.backend.controller;
 import com.example.backend.DTO.ShoppingListDTOOP;
 import com.example.backend.DTO.UserDTOI;
 import com.example.backend.DTO.UserDTOO;
-import com.example.backend.model.ShoppingList;
+import com.example.backend.DTO.UserVerifyDTOI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.backend.model.User;
 import com.example.backend.service.UserService;
 
 import java.util.List;
@@ -49,6 +48,15 @@ public class UserController {
     public List<ShoppingListDTOOP> getAllShoppingLists(@PathVariable String email)
     {
         return userService.getAllShoppingLists(email);
+    }
+
+    @GetMapping(path="/verify", produces = "application/json")
+    public ResponseEntity<String> getVerifyUser(@RequestBody UserVerifyDTOI userVerifyDTOI)
+    {
+        if(userService.getVerifyUser(userVerifyDTOI))
+            return ResponseEntity.status(HttpStatus.CREATED).body("Success");
+        else
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure");
     }
 
     @PostMapping(path= "/add")

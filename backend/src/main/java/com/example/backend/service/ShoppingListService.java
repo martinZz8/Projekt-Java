@@ -88,11 +88,14 @@ public class ShoppingListService {
         }
     }
 
+    @Transactional
     public Integer addShoppingList(ShoppingListDTOI newShoppingList) {
         Optional<User> optional_u = userRepository.findById(newShoppingList.getUser_id());
         if(optional_u.isPresent())
         {
-            ShoppingList sl = new ShoppingList(newShoppingList.getName(), optional_u.get());
+            User u = optional_u.get();
+            ShoppingList sl = new ShoppingList(newShoppingList.getName(), u);
+            u.getShoppingList().add(sl);
             shoppingListRepository.save(sl);
             return 1;
         }
@@ -108,17 +111,19 @@ public class ShoppingListService {
         if(optional_sl.isPresent())
         {
             //deleting shopping list in User
-            List<ShoppingList> s_u = optional_sl.get().getUser().getShoppingList();
+            ShoppingList sl = optional_sl.get();
+            List<ShoppingList> s_u = sl.getUser().getShoppingList();
             for(ShoppingList item : s_u)
             {
                 if(item.getId().equals(shoppingListId))
                 {
-                    s_u.remove(item);
+                    s_u.remove(item); //<- PROPER USAGE IF WE DELETE ONLY ONE ELEMENT IN ITERABLE LIST
                     break;
                 }
             }
             //deleting all linked entries in Product, ShoppingList and ProductsInLists
-            DeleteShoppingList.deleteShoppingList(shoppingListId, optional_sl.get().getProductsInLists(), productsInListsRepository, shoppingListRepository);
+            DeleteShoppingList.deleteShoppingList(sl, productsInListsRepository, shoppingListRepository);
+            //System.out.println("Proper deletion of ShoppingList");
             return true;
         }
         else

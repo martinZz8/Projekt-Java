@@ -4,7 +4,6 @@ import com.example.backend.DTO.ProductDTOI;
 import com.example.backend.DTO.ProductDTOOP;
 import com.example.backend.model.Product;
 import com.example.backend.model.ProductsInLists;
-import com.example.backend.model.ShoppingList;
 import com.example.backend.repositories.ProductRepository;
 import com.example.backend.repositories.ProductsInListsRepository;
 import com.example.backend.repositories.ShoppingListRepository;
@@ -66,19 +65,20 @@ public class ProductService {
         Optional<Product> optional_p = productRepository.findById(productId);
         if(optional_p.isPresent())
         {
-            List<ProductsInLists> pInL_list = optional_p.get().getProductsInListsList();
+            List<ProductsInLists> pInL_list = optional_p.get().getProductsInLists();
             Iterator<ProductsInLists> it = pInL_list.iterator();
             while(it.hasNext())
             {
-                //remove productsInLists in ShoppingList
                 ProductsInLists pInL = it.next();
+                //remove productsInLists in ShoppingList
                 pInL.getShopping_list().getProductsInLists().remove(pInL);
                 //remove productsInLists in Product
-                pInL_list.remove(pInL);
+                //pInL_list.remove(pInL) <- THIS IS FORBIDDEN TO USE IN HERE
+                it.remove(); //<- PROPER USAGE
                 //delete ProductsInLists
-                productsInListsRepository.deleteById(pInL.getId());
+                productsInListsRepository.delete(pInL);
             }
-            //delete product
+            //delete Product
             productRepository.deleteById(productId);
             return true;
         }

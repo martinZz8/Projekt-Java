@@ -1,7 +1,5 @@
 package com.example.backend.model;
 
-import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +18,7 @@ public class Product {
     @Column(name = "description", columnDefinition = "text")
     private String description;
     @OneToMany(mappedBy = "product", fetch = FetchType.EAGER)
-    private List<ProductsInLists> productsInListsList;
+    private List<ProductsInLists> productsInLists;
 
     public Product() {
     }
@@ -30,14 +28,14 @@ public class Product {
         this.name = name;
         this.price = price;
         this.description = description;
-        this.productsInListsList = new ArrayList<>();
+        this.productsInLists = new ArrayList<>();
     }
 
     public Product(String name, Double price, String description) {
         this.name = name;
         this.price = price;
         this.description = description;
-        this.productsInListsList = new ArrayList<>();
+        this.productsInLists = new ArrayList<>();
     }
 
     public Product(Product new_product) {
@@ -45,7 +43,7 @@ public class Product {
         this.name = new_product.name;
         this.price = new_product.price;
         this.description = new_product.description;
-        this.productsInListsList = new_product.productsInListsList;
+        this.productsInLists = new_product.productsInLists;
     }
 
     public Long getId() {
@@ -80,11 +78,11 @@ public class Product {
         this.description = description;
     }
 
-    public List<ProductsInLists> getProductsInListsList() {
-        return productsInListsList;
+    public List<ProductsInLists> getProductsInLists() {
+        return productsInLists;
     }
 
-    public void setProductsInListsList(List<ProductsInLists> productsInListsList) {
-        this.productsInListsList = productsInListsList;
+    public void setProductsInLists(List<ProductsInLists> productsInLists) {
+        this.productsInLists = productsInLists;
     }
 }

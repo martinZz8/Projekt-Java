@@ -52,7 +52,7 @@ public class ProductController {
     }
 
     @DeleteMapping(path="/delete/{productId}")
-    public ResponseEntity<String> deleteShoppingList(@PathVariable String productId)
+    public ResponseEntity<String> deleteProduct(@PathVariable String productId)
     {
         try
         {
