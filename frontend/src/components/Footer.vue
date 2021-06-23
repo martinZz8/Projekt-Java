@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <p id="inscription">Copyright &copy; {{new Date().getFullYear()}} {{name}}</p>
+        <p id="inscription">Copyright &copy; - {{new Date().getFullYear()}} {{name}}</p>
     </footer>
 </template>
 

@@ -1,16 +1,17 @@
 <template>
     <div>
         <b-container v-if="!userLogInFlag" fluid>
-            <b-row align-h="center">            
-                <b-col class="border mt-5 pt-2 pb-2" cols="10" sm="9" md="8" lg="5" xl="4">
-                    <b-form >
+            <b-row class="space"></b-row>
+            <b-row align-h="center">
+                <b-col class="border border-dark rounded pt-2 pb-2" cols="10" sm="9" md="8" lg="5" xl="4" style="background-color: rgba(87, 97, 120, 0.2)">
+                    <b-form>
                         <h2>Login form</h2>
                         <div class="text-left">
                             <b-form-group id="input-group-1" label="Your email:" label-for="input-1">
-                                <b-form-input id="input-1" v-model="form.email" placeholder="Enter your email" type="email" required></b-form-input>
+                                <b-form-input id="input-1" v-model="form.email" @keyup.enter="logIn" placeholder="Enter your email" type="email"></b-form-input>
                             </b-form-group>
                             <b-form-group id="input-group-2" label="Your password:" label-for="input-2">
-                                <b-form-input id="input-2" v-model="form.password" placeholder="Enter your password" type="text" required></b-form-input>
+                                <b-form-input id="input-2" v-model="form.password" @keyup.enter="logIn" placeholder="Enter your password" type="text"></b-form-input>
                             </b-form-group>
                             <b-button @click="logIn" variant="primary">Log in</b-button>
                         </div>
@@ -69,3 +70,15 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+div.row.space {
+    min-height: 90px;
+}
+
+@media all and (min-width: 768px) {
+    div.row.space {
+        min-height: 150px;
+    }
+}
+</style>
