@@ -43,12 +43,13 @@ public class ProductController {
     }
 
     @PostMapping(path= "/add")
-    public ResponseEntity<String> addProduct(@RequestBody ProductDTOI newProduct)
+    public ResponseEntity<ProductDTOOP> addProduct(@RequestBody ProductDTOI newProduct)
     {
-        if(productService.addProduct(newProduct))
-            return ResponseEntity.status(HttpStatus.CREATED).body("Success");
+        ProductDTOOP ret_p = productService.addProduct(newProduct);
+        if(ret_p!=null)
+            return ResponseEntity.status(HttpStatus.CREATED).body(ret_p);
         else
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
     }
 
     @DeleteMapping(path="/delete/{productId}")

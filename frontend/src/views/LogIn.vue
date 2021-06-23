@@ -50,9 +50,9 @@ export default {
             const re = /^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
             if (re.test(String(this.form.email).toLowerCase())) {
                 //let comp = this;
-                //axios localhost:8081/verify with body user (JSON)
-                //if verify is proper, save user in storage (with data retrieved from backend-api)
-                let user = new UserStorage(this.form.email, "1995-06-03", "Adam", "Małysz");
+                //axios localhost:8081/user/verify with body user (JSON)
+                //if verify is proper, get users all data by axios localhost:8081/user/{id}. Then save user in storage (with data retrieved from backend-api)
+                let user = new UserStorage(1 ,this.form.email, "1995-06-03", "Adam", "Małysz");
                 this.$store.commit('loginUser', user);
                 this.$router.push('/lists');
             }

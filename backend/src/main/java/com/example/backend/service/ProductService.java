@@ -54,10 +54,10 @@ public class ProductService {
         }
     }
 
-    public boolean addProduct(ProductDTOI newProduct) {
+    public ProductDTOOP addProduct(ProductDTOI newProduct) {
         Product p = new Product(newProduct.getName(), newProduct.getPrice(), newProduct.getDescription());
-        productRepository.save(p);
-        return true;
+        Product ret_p = productRepository.save(p);
+        return new ProductDTOOP(ret_p);
     }
 
     @Transactional
