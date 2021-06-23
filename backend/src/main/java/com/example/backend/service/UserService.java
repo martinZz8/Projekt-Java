@@ -192,23 +192,26 @@ public class UserService {
         }
     }
 
-    public boolean getVerifyUser(UserVerifyDTOI userVerifyDTOI) {
+    public Integer getVerifyUser(UserVerifyDTOI userVerifyDTOI) {
         User u = userRepository.getByEmail(userVerifyDTOI.getEmail());
         if(u!=null)
         {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             if(passwordEncoder.matches(userVerifyDTOI.getPassword(), u.getPass_hash()))
             {
-                return true;
+                if(u.getBlocked().equals(0))
+                    return 2;
+                else
+                    return 1;
             }
             else
             {
-                return false;
+                return 0;
             }
         }
         else
         {
-            return false;
+            return 0;
         }
     }
 }

@@ -53,10 +53,13 @@ public class UserController {
     @GetMapping(path="/verify", produces = "application/json")
     public ResponseEntity<String> getVerifyUser(@RequestBody UserVerifyDTOI userVerifyDTOI)
     {
-        if(userService.getVerifyUser(userVerifyDTOI))
+        Integer ret = userService.getVerifyUser(userVerifyDTOI);
+        if(ret==2)
             return ResponseEntity.status(HttpStatus.CREATED).body("Success");
+        else if(ret==1)
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure - user is blocked");
         else
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure - wrong input");
     }
 
     @PostMapping(path= "/add")
