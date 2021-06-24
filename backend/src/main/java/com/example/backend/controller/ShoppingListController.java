@@ -67,13 +67,13 @@ public class ShoppingListController {
     }
 
     @PostMapping(path= "/add")
-    public ResponseEntity<String> addShoppingList(@RequestBody ShoppingListDTOI newShoppingList)
+    public ResponseEntity<ShoppingListDTOOP> addShoppingList(@RequestBody ShoppingListDTOI newShoppingList)
     {
-        Integer ret = shoppingListService.addShoppingList(newShoppingList);
-        if(ret==1)
-            return ResponseEntity.status(HttpStatus.CREATED).body("Success");
+        ShoppingListDTOOP ret_s = shoppingListService.addShoppingList(newShoppingList);
+        if(ret_s!=null)
+            return ResponseEntity.status(HttpStatus.CREATED).body(ret_s);
         else
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure - user with given ID doesn't exist");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
     }
 
     @DeleteMapping(path="/delete/{shoppingListId}")

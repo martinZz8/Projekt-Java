@@ -89,19 +89,19 @@ public class ShoppingListService {
     }
 
     @Transactional
-    public Integer addShoppingList(ShoppingListDTOI newShoppingList) {
+    public ShoppingListDTOOP addShoppingList(ShoppingListDTOI newShoppingList) {
         Optional<User> optional_u = userRepository.findById(newShoppingList.getUser_id());
         if(optional_u.isPresent())
         {
             User u = optional_u.get();
             ShoppingList sl = new ShoppingList(newShoppingList.getName(), u);
             u.getShoppingList().add(sl);
-            shoppingListRepository.save(sl);
-            return 1;
+            ShoppingList ret_sl = shoppingListRepository.save(sl);
+            return new ShoppingListDTOOP(ret_sl);
         }
         else
         {
-            return 0;
+            return null;
         }
     }
 
