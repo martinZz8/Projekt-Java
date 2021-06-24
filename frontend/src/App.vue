@@ -53,6 +53,7 @@ export default {
 
 #nav {
   padding: 0px;
+  background-color: rgba(48, 133, 134, 1);
 }
 
 #nav a{
