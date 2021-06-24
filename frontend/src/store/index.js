@@ -11,6 +11,7 @@ export default new Vuex.Store({
       id: null,
       email: null,
       dob: null,
+      age: null,
       firstName: null,
       lastName: null
     },
@@ -32,6 +33,7 @@ export default new Vuex.Store({
       state.user.id=u.id;
       state.user.email=u.email;
       state.user.dob = u.dob;
+      state.user.age = u.age;
       state.user.firstName = u.firstName;
       state.user.lastName = u.lastName;
     },
@@ -39,6 +41,7 @@ export default new Vuex.Store({
       state.user.id = null;
       state.user.email = null;
       state.user.dob = null;
+      state.user.age = null;
       state.user.firstName = null;
       state.user.lastName = null;
     },

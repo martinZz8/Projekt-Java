@@ -29,7 +29,7 @@
                 </b-col> 
             </b-row>
         </b-container>
-        <b-container v-else>
+        <b-container v-else class="pt-5">
             <p>You are already logged in.</p>
         </b-container>
     </div>
@@ -37,7 +37,6 @@
 
 <script>
 import UserStorage from '../models/UserStorage'
-//import Vue from 'vue'
 
 export default {
   name: 'LogIn',
@@ -91,7 +90,7 @@ export default {
                         }).then(response2 => {
                             if(response2.status==200)
                             {
-                                let user = new UserStorage(response2.data.id, response2.data.email, response2.data.dob, response2.data.first_name, response2.data.last_name);
+                                let user = new UserStorage(response2.data.id, response2.data.email, response2.data.dob, response2.data.age, response2.data.first_name, response2.data.last_name);
                                 this.$store.commit('loginUser', user);
                                 this.$router.push('/lists');
                             }

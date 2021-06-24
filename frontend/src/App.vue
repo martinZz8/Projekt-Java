@@ -3,15 +3,15 @@
     <div id="nav" class="flex-grow-1">
       <b-navbar type="dark" variant="dark">
         <b-navbar-nav>
-          <b-nav-item><router-link to="/">Home</router-link></b-nav-item>
-          <b-nav-item v-if="userLogInFlag"><router-link to="/lists">Lists</router-link></b-nav-item>
+          <b-nav-item to="/">Home</b-nav-item>
+          <b-nav-item v-if="userLogInFlag" to="/lists">Lists</b-nav-item>
         </b-navbar-nav>
         <b-navbar-nav class="ml-auto">
           <b-nav-item-dropdown v-if="userLogInFlag" text="User" right>
-            <b-dropdown-item href="#">Account</b-dropdown-item>
+            <b-dropdown-item to="/account">Account</b-dropdown-item>
           </b-nav-item-dropdown>
-          <b-nav-item v-if="!userLogInFlag"><router-link to="/logIn">Log in</router-link></b-nav-item>
-          <b-nav-item v-if="userLogInFlag"><a class="logOutButton" @click="logOut">Log out</a></b-nav-item>
+          <b-nav-item v-if="!userLogInFlag" to="/logIn">Log in</b-nav-item>
+          <b-nav-item v-if="userLogInFlag" @click="logOut">Log out</b-nav-item>
         </b-navbar-nav>
       </b-navbar>
       <router-view/>
@@ -60,12 +60,18 @@ export default {
   color: white;
 }
 
+#nav a:hover{
+  font-weight: bold;
+  color: white;
+  text-decoration: underline;
+}
+
 #nav a.dropdown-item{
   font-weight: bold;
   color: black;
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #42b983!important;
 }
 </style>
