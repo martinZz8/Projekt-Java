@@ -14,11 +14,12 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path="products_in_lists")
-public class ProductsInListsControler {
+@CrossOrigin(origins = "*", allowedHeaders = "*")
+public class ProductsInListsController {
     private final ProductsInListsService productsInListsService;
 
     @Autowired
-    public ProductsInListsControler(ProductsInListsService productsInListsService)
+    public ProductsInListsController(ProductsInListsService productsInListsService)
     {
         this.productsInListsService = productsInListsService;
     }
@@ -59,7 +60,7 @@ public class ProductsInListsControler {
         {
             Integer ret = productsInListsService.updateQuantity(Long.parseLong(productsInListsId), Integer.parseInt(quantity));
             if(ret==1)
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Success");
+                return ResponseEntity.status(HttpStatus.CREATED).body("Success");
             else
                 return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure - products_in_lists with given ID doesn't exist");
         }

@@ -5,10 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
-import com.example.backend.DTO.ShoppingListDTOOP;
-import com.example.backend.DTO.UserDTOI;
-import com.example.backend.DTO.UserDTOO;
-import com.example.backend.DTO.UserVerifyDTOI;
+import com.example.backend.DTO.*;
 import com.example.backend.model.ShoppingList;
 import com.example.backend.model.User;
 import com.example.backend.repositories.ProductRepository;
@@ -192,7 +189,7 @@ public class UserService {
         }
     }
 
-    public Integer getVerifyUser(UserVerifyDTOI userVerifyDTOI) {
+    public UserVerifyO postVerifyUser(UserVerifyDTOI userVerifyDTOI) {
         User u = userRepository.getByEmail(userVerifyDTOI.getEmail());
         if(u!=null)
         {
@@ -200,18 +197,18 @@ public class UserService {
             if(passwordEncoder.matches(userVerifyDTOI.getPassword(), u.getPass_hash()))
             {
                 if(u.getBlocked().equals(0))
-                    return 2;
+                    return new UserVerifyO(2, u.getId(), "Success");
                 else
-                    return 1;
+                    return new UserVerifyO(1, 0L, "Failure - user is blocked");
             }
             else
             {
-                return 0;
+                return new UserVerifyO(0, 0L, "Failure - wrong input");
             }
         }
         else
         {
-            return 0;
+            return new UserVerifyO(0, 0L, "Failure - wrong input");
         }
     }
 }

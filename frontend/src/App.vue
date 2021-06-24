@@ -1,10 +1,19 @@
 <template>
   <div id="app" class="d-flex flex-column min-vh-100">
-    <div id="nav" class="wrapper flex-grow-1">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/lists">Lists</router-link> |
-      <router-link v-if="!userLogInFlag" to="/logIn">Log in</router-link> |
-      <a v-if="userLogInFlag" @click="logOut">Log out</a>
+    <div id="nav" class="flex-grow-1">
+      <b-navbar type="dark" variant="dark">
+        <b-navbar-nav>
+          <b-nav-item><router-link to="/">Home</router-link></b-nav-item>
+          <b-nav-item v-if="userLogInFlag"><router-link to="/lists">Lists</router-link></b-nav-item>
+        </b-navbar-nav>
+        <b-navbar-nav class="ml-auto">
+          <b-nav-item-dropdown v-if="userLogInFlag" text="User" right>
+            <b-dropdown-item href="#">Account</b-dropdown-item>
+          </b-nav-item-dropdown>
+          <b-nav-item v-if="!userLogInFlag"><router-link to="/logIn">Log in</router-link></b-nav-item>
+          <b-nav-item v-if="userLogInFlag"><a class="logOutButton" @click="logOut">Log out</a></b-nav-item>
+        </b-navbar-nav>
+      </b-navbar>
       <router-view/>
     </div>
     <my-footer name='Maciej Harbuz'></my-footer>
@@ -43,12 +52,17 @@ export default {
 }
 
 #nav {
-  padding: 30px;
+  padding: 0px;
 }
 
 #nav a{
   font-weight: bold;
-  color: #2c3e50;
+  color: white;
+}
+
+#nav a.dropdown-item{
+  font-weight: bold;
+  color: black;
 }
 
 #nav a.router-link-exact-active {

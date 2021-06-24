@@ -15,6 +15,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path="product")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ProductController {
     private final ProductService productService;
 

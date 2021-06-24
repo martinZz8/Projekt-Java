@@ -2,6 +2,7 @@ package com.example.backend.service;
 
 import com.example.backend.DTO.AdministratorDTOI;
 import com.example.backend.DTO.AdministratorDTOO;
+import com.example.backend.DTO.AdministratorVerifyO;
 import com.example.backend.model.Administrator;
 import com.example.backend.repositories.AdministratorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,23 +48,23 @@ public class AdministratorService {
         }
     }
 
-    public boolean getVerifyAdministrator(AdministratorDTOI administratorDTOI) {
+    public AdministratorVerifyO postVerifyAdministrator(AdministratorDTOI administratorDTOI) {
         Administrator admin = administratorRepository.getByEmail(administratorDTOI.getEmail());
         if(admin!=null)
         {
             PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             if(passwordEncoder.matches(administratorDTOI.getPassword(), admin.getPass_hash()))
             {
-                return true;
+                return new AdministratorVerifyO(1, admin.getId(), "Success");
             }
             else
             {
-                return false;
+                return new AdministratorVerifyO(1, 0L, "Failure - wrong input");
             }
         }
         else
         {
-            return false;
+            return new AdministratorVerifyO(1, 0L, "Failure - wrong input");
         }
     }
 

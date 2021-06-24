@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.DTO.AdministratorDTOI;
 import com.example.backend.DTO.AdministratorDTOO;
+import com.example.backend.DTO.AdministratorVerifyO;
 import com.example.backend.service.AdministratorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path="administrator")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AdministratorController {
     private final AdministratorService administratorService;
 
@@ -40,13 +42,14 @@ public class AdministratorController {
         }
     }
 
-    @GetMapping(path="/verify", produces = "application/json")
-    public ResponseEntity<String> getVerifyAdministrator(@RequestBody AdministratorDTOI administratorDTOI)
+    @PostMapping(path="/verify", produces = "application/json")
+    public ResponseEntity<AdministratorVerifyO> postVerifyAdministrator(@RequestBody AdministratorDTOI administratorDTOI)
     {
-        if(administratorService.getVerifyAdministrator(administratorDTOI))
-            return ResponseEntity.status(HttpStatus.CREATED).body("Success");
+        AdministratorVerifyO ret = administratorService.postVerifyAdministrator(administratorDTOI);
+        if(ret.getRet_code()==1)
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(ret);
         else
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ret);
     }
 
     @PostMapping(path="/add")
@@ -79,7 +82,7 @@ public class AdministratorController {
     {
         Integer ret = administratorService.updatePasswordOfAdministrator(email, new_password);
         if(ret==2)
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Success");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Success");
         else if (ret==1)
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure - the same password was given");
         else

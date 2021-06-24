@@ -1,9 +1,6 @@
 package com.example.backend.controller;
 
-import com.example.backend.DTO.ShoppingListDTOOP;
-import com.example.backend.DTO.UserDTOI;
-import com.example.backend.DTO.UserDTOO;
-import com.example.backend.DTO.UserVerifyDTOI;
+import com.example.backend.DTO.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path="user")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class UserController {
     private final UserService userService;
 
@@ -50,16 +48,16 @@ public class UserController {
         return userService.getAllShoppingLists(email);
     }
 
-    @GetMapping(path="/verify", produces = "application/json")
-    public ResponseEntity<String> getVerifyUser(@RequestBody UserVerifyDTOI userVerifyDTOI)
+    @PostMapping(path="/verify", produces = "application/json")
+    public ResponseEntity<UserVerifyO> postVerifyUser(@RequestBody UserVerifyDTOI userVerifyDTOI)
     {
-        Integer ret = userService.getVerifyUser(userVerifyDTOI);
-        if(ret==2)
-            return ResponseEntity.status(HttpStatus.CREATED).body("Success");
-        else if(ret==1)
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure - user is blocked");
+        UserVerifyO ret = userService.postVerifyUser(userVerifyDTOI);
+        if(ret.getRet_code()==2)
+        {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(ret);
+        }
         else
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure - wrong input");
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(ret);
     }
 
     @PostMapping(path= "/add")
@@ -105,7 +103,7 @@ public class UserController {
     public ResponseEntity<String> updateBlockOfUser(@RequestParam(name = "email", required = true) String email, @RequestParam(name="block", required = true) String block_flag)
     {
         if(userService.updateBlockOfUser(email, Integer.parseInt(block_flag)))
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Success");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Success");
         else
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure");
     }
@@ -115,7 +113,7 @@ public class UserController {
     {
         Integer ret = userService.updatePasswordOfUser(email, new_password);
         if(ret==2)
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Success");
+            return ResponseEntity.status(HttpStatus.CREATED).body("Success");
         else if (ret==1)
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure - the same password was given");
         else
