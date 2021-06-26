@@ -77,7 +77,7 @@ public class ShoppingListService {
             List<ProductDTOOPT> ret_products = new ArrayList<>();
             for(ProductsInLists pInL : pInL_list)
             {
-                ProductDTOOPT ret_p = new ProductDTOOPT(pInL.getProduct(), pInL.getQuantity());
+                ProductDTOOPT ret_p = new ProductDTOOPT(pInL.getProduct(), pInL.getQuantity(), pInL.getId());
                 ret_products.add(ret_p);
             }
             return ret_products;

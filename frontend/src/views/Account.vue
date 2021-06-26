@@ -3,7 +3,7 @@
     <b-container v-if="userLogInFlag" fluid>
         <b-row class="space"></b-row>
         <b-row align-h="center">
-            <b-col cols="4">
+            <b-col cols="10" sm="9" md="7" lg="5" xl="3">
                 <b-card title="Account informations">
                     <b-card-text style="font-weight: 500;">
                         <p>Email: {{account.email}}</p>

@@ -44,13 +44,13 @@ public class ProductsInListsController {
     }
 
     @PostMapping(path= "/add")
-    public ResponseEntity<String> addProductsInList(@RequestBody ProductsInListsDTOI newProductsInLists)
+    public ResponseEntity<ProductsInListsDTOO> addProductsInList(@RequestBody ProductsInListsDTOI newProductsInLists)
     {
-        Integer ret = productsInListsService.addProductsInList(newProductsInLists);
-        if(ret==1)
-            return ResponseEntity.status(HttpStatus.CREATED).body("Success");
+        ProductsInListsDTOO ret_pInL = productsInListsService.addProductsInList(newProductsInLists);
+        if(ret_pInL!=null)
+            return ResponseEntity.status(HttpStatus.CREATED).body(ret_pInL);
         else
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Failure - given data is invalid");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
     }
 
     @PutMapping(path = "/update/{productsInListsId}")

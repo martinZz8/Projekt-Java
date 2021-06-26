@@ -55,7 +55,7 @@ public class ProductsInListsService {
     }
 
     @Transactional
-    public Integer addProductsInList(ProductsInListsDTOI newProductsInLists) {
+    public ProductsInListsDTOO addProductsInList(ProductsInListsDTOI newProductsInLists) {
         Optional<ShoppingList> optional_sl = shoppingListRepository.findById(newProductsInLists.getShopping_list_id());
         Optional<Product> optional_p = productRepository.findById(newProductsInLists.getProduct_id());
         if(optional_sl.isPresent() && optional_p.isPresent())
@@ -65,12 +65,12 @@ public class ProductsInListsService {
             ProductsInLists pInL = new ProductsInLists(sl, p, newProductsInLists.getQuantity());
             sl.getProductsInLists().add(pInL);
             p.getProductsInLists().add(pInL);
-            productsInListsRepository.save(pInL);
-            return 1;
+            ProductsInLists saved_pInL = productsInListsRepository.save(pInL);
+            return new ProductsInListsDTOO(saved_pInL);
         }
         else
         {
-            return 0;
+            return null;
         }
     }
 

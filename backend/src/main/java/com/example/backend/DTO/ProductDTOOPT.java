@@ -8,23 +8,26 @@ public class ProductDTOOPT {
     private Double price;
     private String description;
     private Integer quantity;
+    private Long products_in_lists_id;
 
     public ProductDTOOPT() {
     }
 
-    public ProductDTOOPT(Long id, String name, Double price, String description, Integer quantity) {
+    public ProductDTOOPT(Long id, String name, Double price, String description, Integer quantity, Long products_in_lists_id) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.description = description;
         this.quantity = quantity;
+        this.products_in_lists_id = products_in_lists_id;
     }
 
-    public ProductDTOOPT(String name, Double price, String description, Integer quantity) {
+    public ProductDTOOPT(String name, Double price, String description, Integer quantity, Long products_in_lists_id) {
         this.name = name;
         this.price = price;
         this.description = description;
         this.quantity = quantity;
+        this.products_in_lists_id = products_in_lists_id;
     }
 
     public ProductDTOOPT(ProductDTOOPT productDTOOPT) {
@@ -33,14 +36,16 @@ public class ProductDTOOPT {
         this.price = productDTOOPT.price;
         this.description = productDTOOPT.description;
         this.quantity = productDTOOPT.quantity;
+        this.products_in_lists_id = productDTOOPT.products_in_lists_id;
     }
 
-    public ProductDTOOPT(Product product, Integer quantity) {
+    public ProductDTOOPT(Product product, Integer quantity, Long products_in_lists_id) {
         this.id = product.getId();
         this.name = product.getName();
         this.price = product.getPrice();
         this.description = product.getDescription();
         this.quantity = quantity;
+        this.products_in_lists_id = products_in_lists_id;
     }
 
     public Long getId() {
@@ -81,6 +86,14 @@ public class ProductDTOOPT {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public Long getProducts_in_lists_id() {
+        return products_in_lists_id;
+    }
+
+    public void setProducts_in_lists_id(Long products_in_lists_id) {
+        this.products_in_lists_id = products_in_lists_id;
     }
 }
 

@@ -63,7 +63,6 @@ public class ShoppingListController {
         {
             return new ArrayList<>();
         }
-
     }
 
     @PostMapping(path= "/add")

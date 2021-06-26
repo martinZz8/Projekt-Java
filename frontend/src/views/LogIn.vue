@@ -3,7 +3,7 @@
         <b-container v-if="!userLogInFlag" fluid>
             <b-row class="space"></b-row>
             <b-row align-h="center">
-                <b-col class="border border-dark rounded pt-2 pb-2" cols="10" sm="9" md="8" lg="5" xl="4" style="background-color: rgba(87, 97, 120, 0.2)">
+                <b-col class="border border-dark rounded pt-2 pb-2" cols="10" sm="9" md="8" lg="5" xl="4" style="background-color: rgba(135, 182, 199, 0.3);">
                     <b-card v-if="error_login.error_card_flag" bg-variant="danger" text-variant="white" header="Login failed" class="text-center">
                         <b-row>
                             <b-col cols="11">
