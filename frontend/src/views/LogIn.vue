@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="login">
         <b-container v-if="!userLogInFlag" fluid>
             <b-row class="space"></b-row>
             <b-row align-h="center">
-                <b-col class="border border-dark rounded pt-2 pb-2" cols="10" sm="9" md="8" lg="5" xl="4" style="background-color: rgba(135, 182, 199, 0.3);">
+                <b-col class="border border-dark rounded pt-2 pb-2" cols="10" sm="9" md="8" lg="5" xl="4" style="background-color: rgba(152, 217, 211, 0.8);">
                     <b-card v-if="error_login.error_card_flag" bg-variant="danger" text-variant="white" header="Login failed" class="text-center">
                         <b-row>
                             <b-col cols="11">
@@ -23,7 +23,10 @@
                             <b-form-group id="input-group-2" label="Your password:" label-for="input-2">
                                 <b-form-input id="input-2" v-model="form.password" @keyup.enter="logIn" placeholder="Enter your password" type="password"></b-form-input>
                             </b-form-group>
-                            <b-button @click="logIn" variant="primary">Log in</b-button>
+                            <b-row class="p-2">
+                                <b-button @click="logIn" variant="primary">Log in</b-button>
+                                <span class="ml-auto">Don't have account? <router-link style="color: black;" to="/register">Register now</router-link></span>
+                            </b-row>
                         </div>
                     </b-form>
                 </b-col> 
@@ -99,7 +102,7 @@ export default {
                                 console.log(response);
                             }
                         }).catch(() => {
-                            this.error_login.error_text = "Serwer error, please try later";
+                            this.error_login.error_text = "Server error, please try later";
                             this.error_login.error_card_flag = true;
                         });
                     }
@@ -117,13 +120,13 @@ export default {
             }
             else
             {
-                this.error_login.error_text = 'Podano zły schemat adresu email';
+                this.error_login.error_text = 'Given email chema is not valid';
                 this.error_login.error_card_flag = true;
             }
         }
         else
         {
-            this.error_login.error_text = 'Nie podano hasła';
+            this.error_login.error_text = 'Password input is empty';
             this.error_login.error_card_flag = true;
         }
     }
@@ -132,6 +135,10 @@ export default {
 </script>
 
 <style scoped>
+div.login {
+    color: black;
+}
+
 div.row.space {
     min-height: 90px;
 }

@@ -12,6 +12,7 @@
           </b-nav-item-dropdown>
           <b-nav-item v-if="!userLogInFlag" to="/logIn">Log in</b-nav-item>
           <b-nav-item v-if="userLogInFlag" @click="logOut">Log out</b-nav-item>
+          <b-nav-item v-if="!userLogInFlag" to="/register">Register</b-nav-item>
         </b-navbar-nav>
       </b-navbar>
       <router-view/>
