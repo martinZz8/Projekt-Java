@@ -212,19 +212,16 @@
                       <b-card no-body class="text-center p-1">
                         <b-row>
                           <b-col cols="11" class="p-0">
-                            <div class="inline">
+                            <div>
                               <span class="underline">Product:</span> {{product.name}}
                             </div>
-                            <br>
-                            <div class="inline">
+                            <div>
                               <span class="underline">Price:</span> {{product.price}} PLN
                             </div>
-                            <br>
-                            <div class="inline">
+                            <div>
                               <span class="underline">Description:</span> {{product.description}}
                             </div>
-                            <br>
-                            <div class="inline">
+                            <div>
                               <span class="underline">Quantity:</span> {{product.quantity}}
                             </div>
                           </b-col>
@@ -243,6 +240,7 @@
                 </b-row>
               </b-col>
             </b-row>
+            <b-overlay :show="show_all_lists_overlay" no-wrap></b-overlay>
           </b-col>
           <b-col cols="auto p-0"></b-col>
         </b-row>
@@ -310,7 +308,8 @@ export default {
         error_card_flag: false,
         error_text: ''
       },
-      show_list_overlay: false
+      show_list_overlay: false,
+      show_all_lists_overlay: false
     }
   },
   mounted () {
@@ -341,6 +340,7 @@ export default {
       this.input_p_update.quantity = this.products[product_index].quantity;
     },
     downloadAllLists() {
+      this.show_all_lists_overlay = true;
       this.axios({
         method: "GET",
         url: 'http://localhost:8081/user/all_shopping_lists/'+this.$store.state.user.email,
@@ -352,11 +352,13 @@ export default {
         {
           this.lists = response.data;
           this.error_get_array.error_card_flag = false;
+          this.show_all_lists_overlay = false;
         }
       }).catch(error => {
         console.log(error.response);
         this.error_get_array.error_text = 'There is problem with server connectivity - please try again later';
         this.error_get_array.error_card_flag = true;
+        this.show_all_lists_overlay = false;
       });
     },
     downloadAllProductsInList(list_id) {
@@ -672,7 +674,5 @@ export default {
     text-decoration: underline;
   }
 
-  div.inline {
-    display: inline;
-  }
+  
 </style>>
